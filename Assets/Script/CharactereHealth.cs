@@ -10,11 +10,6 @@ public class CharactereHealth : MonoBehaviour
         transform.position = spawn.transform.position;
     }
 
-    void Update()
-    {
-        
-    }
-
     public void TakeDamage()
     {
         heart -= 1;
