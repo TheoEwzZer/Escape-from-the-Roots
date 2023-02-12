@@ -23,12 +23,13 @@ public class EnemyPatrol : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 dir = target.position - transform.position;
+        float rotationZ = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
         transform.Translate(dir.normalized * speed * Time.fixedDeltaTime, Space.World);
         if (Vector3.Distance(transform.position, target.position) < 0.05f) {
             destPoint = (destPoint + 1) % waypoints.Length;
             target = waypoints[destPoint];
         }
-        float rotationZ = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         if (rotationZ > -45 && rotationZ < 45)
             direction = 6;
         else if (rotationZ > 45 && rotationZ < 135)
@@ -51,14 +52,13 @@ public class EnemyPatrol : MonoBehaviour
                 StartCoroutine(ScreamerEnd());
             else
                 StartCoroutine(ScreamerContinue());
-
         }
     }
 
     public IEnumerator ScreamerEnd()
     {
         yield return new WaitForSeconds(0.9f);
-        SceneManager.LoadScene("GameOver");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public IEnumerator ScreamerContinue()

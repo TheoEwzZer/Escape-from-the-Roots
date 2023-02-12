@@ -17,6 +17,7 @@ public class CharactereMotor : MonoBehaviour
     public Light2D flashlight;
     public Light2D vignette;
     public bool idle = false;
+
     void Start()
     {
         stepSound.volume = 0.15f;
@@ -28,11 +29,9 @@ public class CharactereMotor : MonoBehaviour
     }
 
     private void Update() {
-        if (idle)
-            stepSound.volume = 0f;
-        else
-            stepSound.volume = 0.15f;
-        if (flashlightAction.IsPressed() && flashlightAction.WasPressedThisFrame() && GameManager.instance.hasFlashlight) {
+        stepSound.volume = idle ? 0f : 0.15f;
+        if (flashlightAction.IsPressed() && flashlightAction.WasPressedThisFrame()
+        && GameManager.instance.hasFlashlight) {
             if (!flashlight.enabled)
                 torchSound.Play();
             flashlight.enabled = !flashlight.enabled;
@@ -40,18 +39,25 @@ public class CharactereMotor : MonoBehaviour
         }
     }
 
+
     private void FixedUpdate()
     {
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
+
         moveValue = ChooseDirection(moveValue);
         velocity = moveValue * speed;
-        transform.position += new Vector3(velocity.x * Time.fixedDeltaTime, velocity.y * Time.fixedDeltaTime, 0);
+        transform.position += new Vector3(
+            velocity.x * Time.fixedDeltaTime,
+            velocity.y * Time.fixedDeltaTime,
+            0
+        );
         anim.SetInteger("Direction", direction);
     }
 
     private Vector2 ChooseDirection(Vector2 value)
     {
         Vector2 result = Vector2.zero;
+
         if (Mathf.Abs(value.x) > Mathf.Abs(value.y))
             result = new Vector2(value.x, 0);
         else
@@ -62,30 +68,28 @@ public class CharactereMotor : MonoBehaviour
 
     private int SetDirection(Vector2 vector, int direction)
     {
+        int newDirection = direction;
+
         if (vector.x > 0) {
             idle = false;
             flashlight.transform.rotation = Quaternion.Euler(0, 0, -90);
-            return 6;
-        }
-        if (vector.x < 0) {
+            newDirection = 6;
+        } else if (vector.x < 0) {
             idle = false;
             flashlight.transform.rotation = Quaternion.Euler(0, 0, 90);
-            return 4;
-        }
-        if (vector.y > 0) {
+            newDirection = 4;
+        } else if (vector.y > 0) {
             idle = false;
             flashlight.transform.rotation = Quaternion.Euler(0, 0, 0);
-            return 8;
-        }
-        if (vector.y < 0) {
+            newDirection = 8;
+        } else if (vector.y < 0) {
             idle = false;
             flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
-            return 2;
-        }
-        if (idle == false) {
+            newDirection = 2;
+        } else if (!idle) {
             idle = true;
-            return direction + 10;
+            newDirection = direction + 10;
         }
-        return direction;
+        return newDirection;
     }
 }

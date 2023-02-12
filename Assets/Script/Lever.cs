@@ -23,7 +23,9 @@ public class Lever : MonoBehaviour
 
     private void Update()
     {
-        if (transform.position.y >= player.transform.position.y && Vector2.Distance(player.transform.position, transform.position) < 1f && !door.enabled) {
+        if (transform.position.y >= player.transform.position.y
+        && Vector2.Distance(player.transform.position, transform.position) < 1f
+        && !door.enabled) {
             leverText.SetActive(true);
             if (leverAction.IsPressed() && leverAction.WasPressedThisFrame()) {
                 leverSound.Play();

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
 public class Door : MonoBehaviour
@@ -25,11 +24,12 @@ public class Door : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.GetInstance().totemCount >= GameManager.GetInstance().maxTotems && !door.enabled) {
+        if (manager.totemCount >= manager.maxTotems && !door.enabled) {
             doorSound.Play();
             door.enabled = true;
         }
-        if (Vector2.Distance(player.transform.position, transform.position) < 1f && door.enabled && !story.activeSelf) {
+        if (Vector2.Distance(player.transform.position, transform.position) < 1f
+        && door.enabled && !story.activeSelf) {
             doorText.SetActive(true);
             if (doorAction.IsPressed() && doorAction.WasPressedThisFrame()) {
                 doorText.SetActive(false);

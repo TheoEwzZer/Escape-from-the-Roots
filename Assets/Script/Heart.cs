@@ -5,9 +5,8 @@ public class Heart : MonoBehaviour
     public GameObject[] hearts;
     void Start()
     {
-        for (int i = 0; i < hearts.Length; i++) {
+        for (int i = 0; i < hearts.Length; i++)
             hearts[i].SetActive(true);
-        }
     }
 
     public void TakeDamage()

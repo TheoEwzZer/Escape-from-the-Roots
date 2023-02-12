@@ -9,15 +9,13 @@ public class Trap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.transform.CompareTag("Player")) {
+        if (other.transform.CompareTag("Player"))
             player.GetComponent<CharactereMotor>().speed = slow;
-        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.transform.CompareTag("Player")) {
+        if (other.transform.CompareTag("Player"))
             player.GetComponent<CharactereMotor>().speed = 5;
-        }
     }
 }

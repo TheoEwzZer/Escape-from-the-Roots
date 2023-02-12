@@ -23,7 +23,8 @@ public class DoorTP : MonoBehaviour
 
     private void Update()
     {
-        if (Vector2.Distance(player.transform.position, transform.position) < distance && door.enabled) {
+        if (Vector2.Distance(player.transform.position, transform.position) < distance
+        && door.enabled) {
             doorText.SetActive(true);
             if (doorAction.IsPressed() && doorAction.WasPressedThisFrame()) {
                 if (player.transform.position.y > transform.position.y)

@@ -19,19 +19,11 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    private void Update()
-    {
-        if (escapeAction.IsPressed() && escapeAction.WasPressedThisFrame()) {
-            SceneManager.LoadScene("MainMenu");
-        }
-    }
-
     private void Start()
     {
         hasFlashlight = false;
         totemText.text = totemCount + "/" + maxTotems;
         inputs = instance.GetInputs();
-        escapeAction = inputs.actions.FindAction("Exit");
     }
 
     public static GameManager GetInstance()
