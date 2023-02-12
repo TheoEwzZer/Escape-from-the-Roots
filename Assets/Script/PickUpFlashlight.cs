@@ -16,8 +16,6 @@ public class PickUpFlashlight : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         GameManager.instance.SetFlashlight(true);
-        flashlight.enabled = true;
-        vignette.enabled = false;
         StartCoroutine(UseTorch());
     }
 
