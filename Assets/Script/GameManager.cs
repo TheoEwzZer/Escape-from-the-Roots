@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public bool isPaused;
     public TextMeshProUGUI totemText;
     public int maxTotems = 4;
     public static GameManager instance;
@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        isPaused = false;
         hasFlashlight = false;
         totemText.text = totemCount + "/" + maxTotems;
         inputs = instance.GetInputs();
@@ -45,5 +46,10 @@ public class GameManager : MonoBehaviour
     public void SetFlashlight(bool hasFlashlight)
     {
         this.hasFlashlight = hasFlashlight;
+    }
+
+    public void setPause(bool pause)
+    {
+        isPaused = pause;
     }
 }

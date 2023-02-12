@@ -504,6 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be847b0c83e43b1409a4c72e03aaf3cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPaused: 0
   totemText: {fileID: 1431456325}
   maxTotems: 4
   inputs: {fileID: 66869715}
@@ -1426,6 +1427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebc23fe16d5c8c43aa325a3c8e2832f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 66869714}
   health: {fileID: 137595830}
   anim: {fileID: 182223779}
   screamerSound: {fileID: 731778873}
@@ -1603,6 +1605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebc23fe16d5c8c43aa325a3c8e2832f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 66869714}
   health: {fileID: 137595830}
   anim: {fileID: 223583100}
   screamerSound: {fileID: 731778873}
@@ -1818,6 +1821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebc23fe16d5c8c43aa325a3c8e2832f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 66869714}
   health: {fileID: 137595830}
   anim: {fileID: 259972769}
   screamerSound: {fileID: 731778873}
@@ -3467,12 +3471,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 32
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -3740,7 +3744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114858295441557700, guid: caca060be7d9d574da5ae50198e2a4b2, type: 3}
       propertyPath: pressAction.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114858295441557700, guid: caca060be7d9d574da5ae50198e2a4b2, type: 3}
       propertyPath: pressAction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -3748,7 +3752,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114858295441557700, guid: caca060be7d9d574da5ae50198e2a4b2, type: 3}
       propertyPath: pressAction.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114858295441557700, guid: caca060be7d9d574da5ae50198e2a4b2, type: 3}
       propertyPath: pressAction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3757,7 +3761,7 @@ PrefabInstance:
     - target: {fileID: 114858295441557700, guid: caca060be7d9d574da5ae50198e2a4b2, type: 3}
       propertyPath: pressAction.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 66869714}
     - target: {fileID: 114858295441557700, guid: caca060be7d9d574da5ae50198e2a4b2, type: 3}
       propertyPath: pressAction.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -3768,15 +3772,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114858295441557700, guid: caca060be7d9d574da5ae50198e2a4b2, type: 3}
       propertyPath: pressAction.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
+      value: setPause
       objectReference: {fileID: 0}
     - target: {fileID: 114858295441557700, guid: caca060be7d9d574da5ae50198e2a4b2, type: 3}
       propertyPath: pressAction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: TheoEwzZer.UI.ModalWindowManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 114858295441557700, guid: caca060be7d9d574da5ae50198e2a4b2, type: 3}
+      propertyPath: pressAction.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114858295441557700, guid: caca060be7d9d574da5ae50198e2a4b2, type: 3}
       propertyPath: pressAction.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 114904339282312958, guid: caca060be7d9d574da5ae50198e2a4b2, type: 3}
       propertyPath: m_havePropertiesChanged
@@ -4272,12 +4280,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 32
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -70478,6 +70486,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 66869714}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: setPause
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1749074141
 GameObject:
   m_ObjectHideFlags: 0
@@ -70638,6 +70658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebc23fe16d5c8c43aa325a3c8e2832f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 66869714}
   health: {fileID: 137595830}
   anim: {fileID: 1816522941}
   screamerSound: {fileID: 731778873}

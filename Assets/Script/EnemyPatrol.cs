@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class EnemyPatrol : MonoBehaviour
 {
+    public GameManager gameManager;
     public CharactereHealth health;
     private int direction;
     public Animator anim;
@@ -22,6 +23,8 @@ public class EnemyPatrol : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (gameManager.isPaused)
+            return;
         Vector3 dir = target.position - transform.position;
         float rotationZ = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
@@ -42,6 +45,8 @@ public class EnemyPatrol : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
+        if (gameManager.isPaused)
+            return;
         if (other.transform.CompareTag("Player")) {
             screamer.SetActive(true);
             screamerSound.Play();
