@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,12 +27,26 @@ public class Lever : MonoBehaviour
         if (transform.position.y >= player.transform.position.y
         && Vector2.Distance(player.transform.position, transform.position) < 1f
         && !door.enabled) {
+            if (GameManager.instance.isMobile)
+                leverText.GetComponent<TextMeshProUGUI>().text = "Touch the screen to use";
+            else
+                leverText.GetComponent<TextMeshProUGUI>().text = "Press E to use";
             leverText.SetActive(true);
-            if (leverAction.IsPressed() && leverAction.WasPressedThisFrame()) {
-                leverSound.Play();
-                lever.sprite = leverOn;
-                door.enabled = true;
-                leverText.SetActive(false);
+            if (GameManager.instance.isMobile) {
+                if (UnityEngine.Input.GetMouseButtonDown(0)) {
+                    leverSound.Play();
+                    lever.sprite = leverOn;
+                    door.enabled = true;
+                    leverText.SetActive(false);
+                }
+            } else {
+                if (leverAction.IsPressed() && leverAction.WasPressedThisFrame())
+                {
+                    leverSound.Play();
+                    lever.sprite = leverOn;
+                    door.enabled = true;
+                    leverText.SetActive(false);
+                }
             }
         } else if (leverText.activeSelf) {
             leverText.SetActive(false);

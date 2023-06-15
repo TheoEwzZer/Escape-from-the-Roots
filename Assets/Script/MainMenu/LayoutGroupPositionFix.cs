@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +11,16 @@ namespace TheoEwzZer.UI
         void Start()
         {
             // BECAUSE UNITY UI IS BUGGY AND NEEDS REFRESHING :P
-            lg = gameObject.GetComponent<LayoutGroup>();
+            try {
+                lg = gameObject.GetComponent<LayoutGroup>();
+            } catch {
+                Debug.LogError("LayoutGroupPositionFix: No LayoutGroup found on this GameObject!");
+            }
+            StartCoroutine(ExecuteAfterTime(0.01f));
+        }
+
+        public void Fix()
+        {
             StartCoroutine(ExecuteAfterTime(0.01f));
         }
 
@@ -22,7 +30,7 @@ namespace TheoEwzZer.UI
             lg.enabled = false;
             lg.enabled = true;
             StopCoroutine(ExecuteAfterTime(0.01f));
-            Destroy(this);
+            //Destroy(this);
         }
     }
 }

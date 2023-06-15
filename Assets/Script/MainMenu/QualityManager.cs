@@ -21,6 +21,7 @@ namespace TheoEwzZer.UI
         public DynamicRes clickEvent;
 
         [Header("SETTINGS")]
+        public bool isMobile = false;
 
         Resolution[] resolutions;
         List<string> options = new List<string>();
@@ -30,23 +31,25 @@ namespace TheoEwzZer.UI
             mixer.SetFloat("Master", Mathf.Log10(PlayerPrefs.GetFloat(masterSlider.sliderTag + "DarkSliderValue")) * 20);
             mixer.SetFloat("Music", Mathf.Log10(PlayerPrefs.GetFloat(musicSlider.sliderTag + "DarkSliderValue")) * 20);
             mixer.SetFloat("SFX", Mathf.Log10(PlayerPrefs.GetFloat(sfxSlider.sliderTag + "DarkSliderValue")) * 20);
-            resolutionSelector.dropdownItems.RemoveRange(0, resolutionSelector.dropdownItems.Count);
-            resolutions = Screen.resolutions;
-            int currentResolutionIndex = 0;
-            for (int i = 0; i < resolutions.Length; i++) {
-                string option = resolutions[i].width + " x " + resolutions[i].height;
-                options.Add(option);
-                if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height) {
-                    currentResolutionIndex = i;
-                    resolutionSelector.selectedItemIndex = currentResolutionIndex;
-                    resolutionSelector.index = currentResolutionIndex;
+            if (!isMobile) {
+                resolutionSelector.dropdownItems.RemoveRange(0, resolutionSelector.dropdownItems.Count);
+                resolutions = Screen.resolutions;
+                int currentResolutionIndex = 0;
+                for (int i = 0; i < resolutions.Length; i++) {
+                    string option = resolutions[i].width + " x " + resolutions[i].height;
+                    options.Add(option);
+                    if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height) {
+                        currentResolutionIndex = i;
+                        resolutionSelector.selectedItemIndex = currentResolutionIndex;
+                        resolutionSelector.index = currentResolutionIndex;
+                    }
+                    resolutionSelector.CreateNewOption(options[i]);
+                    CustomDropdown.Item item = resolutionSelector.dropdownItems[i];
+                    item.OnItemSelection = new UnityEngine.Events.UnityEvent();
+                    item.OnItemSelection.AddListener(UpdateResolution);
                 }
-                resolutionSelector.CreateNewOption(options[i]);
-                CustomDropdown.Item item = resolutionSelector.dropdownItems[i];
-                item.OnItemSelection = new UnityEngine.Events.UnityEvent();
-                item.OnItemSelection.AddListener(UpdateResolution);
+                resolutionSelector.SetupDropdown();
             }
-            resolutionSelector.SetupDropdown();
         }
 
         public void UpdateResolution()

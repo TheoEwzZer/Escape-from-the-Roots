@@ -4,6 +4,7 @@ using UnityEngine.Rendering.Universal;
 
 public class PickUpFlashlight : MonoBehaviour
 {
+    public GameManager gameManager;
     public GameObject torch;
     public Light2D flashlight;
     public Light2D vignette;
@@ -16,7 +17,14 @@ public class PickUpFlashlight : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         GameManager.instance.SetFlashlight(true);
-        StartCoroutine(UseTorch());
+        if (gameManager.isMobile) {
+            flashlight.enabled = true;
+            vignette.enabled = true;
+            GetComponent<Light2D>().enabled = false;
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        } else {
+            StartCoroutine(UseTorch());
+        }
     }
 
     public IEnumerator UseTorch()

@@ -4,6 +4,7 @@ using UnityEngine.Rendering.Universal;
 
 public class CharactereMotor : MonoBehaviour
 {
+    public VariableJoystick variableJoystick;
     public AudioSource stepSound;
     public AudioSource torchSound;
     private PlayerInput inputs;
@@ -42,15 +43,22 @@ public class CharactereMotor : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 moveValue = moveAction.ReadValue<Vector2>();
+        Vector2 moveValue;
 
-        moveValue = ChooseDirection(moveValue);
+        if (GameManager.instance.isMobile)
+            moveValue = new Vector2(variableJoystick.Horizontal, variableJoystick.Vertical);
+        else
+            moveValue = moveAction.ReadValue<Vector2>();
+        if (!GameManager.instance.isMobile)
+            moveValue = ChooseDirection(moveValue);
         velocity = moveValue * speed;
         transform.position += new Vector3(
             velocity.x * Time.fixedDeltaTime,
             velocity.y * Time.fixedDeltaTime,
             0
         );
+        if (GameManager.instance.isMobile)
+            moveValue = ChooseDirection(moveValue);
         anim.SetInteger("Direction", direction);
     }
 

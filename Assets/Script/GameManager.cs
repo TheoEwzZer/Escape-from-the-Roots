@@ -4,6 +4,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public bool isMobile;
     public bool isPaused;
     public TextMeshProUGUI totemText;
     public int maxTotems = 4;
